@@ -3,19 +3,19 @@ import './cell_detail.dart';
 
 class ArticleDetail extends StatelessWidget
 {
-  final article;
+    final article;
 
-  ArticleDetail(this.article);
+    ArticleDetail(this.article);
 
-  @override
+    @override
     Widget build(BuildContext context) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(article['title']),
-        ),
-        body: new Center(
-          child: new ArticleDetailCell(article),
-        ),
-      );
+        return new Scaffold(
+            appBar: new AppBar(
+                title: new Text(article['title']),
+            ),
+            body: new Center(
+                child: new ArticleDetailCell(article),
+            ),
+        );
     }
 }
