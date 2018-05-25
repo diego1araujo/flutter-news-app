@@ -36,23 +36,25 @@ class HomeCell extends StatelessWidget
             ),
         );
 
-        return new Container(
-            padding: new EdgeInsets.all(5.0),
-            child: new Card(
-                elevation: 3.0,
-                child: new Padding(
-                    padding: new EdgeInsets.all(0.0),
-                    child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                            _imageCover,
-                            _published,
-                            _title,
-                        ],
-                    ),
+        final _createCard = new Card(
+            elevation: 3.0,
+            child: new Padding(
+                padding: new EdgeInsets.all(0.0),
+                child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                        _imageCover,
+                        _published,
+                        _title,
+                    ],
                 ),
             ),
+        );
+
+        return new Container(
+            padding: new EdgeInsets.all(5.0),
+            child: _createCard,
         );
     }
 }
