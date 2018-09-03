@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomeCell extends StatelessWidget
 {
@@ -18,7 +18,7 @@ class HomeCell extends StatelessWidget
         final _published = new Padding(
             padding: new EdgeInsets.all(8.0),
             child: new Text(
-                'Published ' + timeAgo(DateTime.parse(article['publishedAt'])),
+                'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
                 style: new TextStyle(
                     color: Colors.grey[500],
                 ),
