@@ -9,12 +9,12 @@ class Detail extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        return new Scaffold(
-            appBar: new AppBar(
-                title: new Text(article['title']),
+        return Scaffold(
+            appBar: AppBar(
+                title: Text(article['title']),
             ),
-            body: new Center(
-                child: new DetailCell(article),
+            body: Center(
+                child: DetailCell(article),
             ),
         );
     }

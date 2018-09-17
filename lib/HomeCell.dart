@@ -11,36 +11,36 @@ class HomeCell extends StatelessWidget
     Widget build(BuildContext context) {
         final bool existsImage = article['urlToImage'] != null;
 
-        final _imageCover = new SizedBox(
-            child: existsImage ? new Image.network(article['urlToImage']) : null,
+        final _imageCover = SizedBox(
+            child: existsImage ? Image.network(article['urlToImage']) : null,
         );
 
-        final _published = new Padding(
-            padding: new EdgeInsets.all(8.0),
-            child: new Text(
+        final _published = Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
                 'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
-                style: new TextStyle(
+                style: TextStyle(
                     color: Colors.grey[500],
                 ),
             ),
         );
 
-        final _title = new Padding(
-            padding: new EdgeInsets.all(8.0),
-            child: new Text(
+        final _title = Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
                 article['title'],
-                style: new TextStyle(
+                style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                 ),
             ),
         );
 
-        final _createCard = new Card(
+        final _createCard = Card(
             elevation: 3.0,
-            child: new Padding(
-                padding: new EdgeInsets.all(0.0),
-                child: new Column(
+            child: Padding(
+                padding: EdgeInsets.all(0.0),
+                child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -52,8 +52,8 @@ class HomeCell extends StatelessWidget
             ),
         );
 
-        return new Container(
-            padding: new EdgeInsets.all(5.0),
+        return Container(
+            padding: EdgeInsets.all(5.0),
             child: _createCard,
         );
     }

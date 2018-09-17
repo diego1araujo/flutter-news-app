@@ -11,46 +11,46 @@ class DetailCell extends StatelessWidget
     Widget build(BuildContext context) {
         final bool existsImage = article['urlToImage'] != null;
 
-        final _published = new Padding(
-            padding: new EdgeInsets.only(bottom: 8.0),
-            child: new Text(
+        final _published = Padding(
+            padding: EdgeInsets.only(bottom: 8.0),
+            child: Text(
                 'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
-                style: new TextStyle(
+                style: TextStyle(
                     color: Colors.grey[500],
                 ),
             ),
         );
 
-        final _title = new Padding(
-            padding: new EdgeInsets.only(bottom: 10.0),
-            child: new Text(
+        final _title = Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: Text(
                 article['title'],
-                style: new TextStyle(
+                style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                 ),
             ),
         );
 
-        final _imageCover = existsImage ? new SizedBox(
-            child: new Image.network(article['urlToImage']),
+        final _imageCover = existsImage ? SizedBox(
+            child: Image.network(article['urlToImage']),
         ) : null;
 
-        final _description = new Padding(
-            padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
-            child: new Text(
+        final _description = Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Text(
                 article['description'],
-                style: new TextStyle(
+                style: TextStyle(
                     fontSize: 14.0,
                 ),
             ),
         );
 
-        return new Column(
+        return Column(
             children: <Widget>[
-                new Container(
-                    padding: new EdgeInsets.all(10.0),
-                    child: new Column(
+                Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                             _published,
