@@ -6,14 +6,14 @@ import 'main.dart';
 import 'HomeCell.dart';
 import 'Detail.dart';
 
+const request = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
+
 class NewsAppState extends State<NewsApp>
 {
     List articles = [];
 
     Future<List> fetchData() async {
-        final url = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
-
-        final response = await http.get(url);
+        http.Response response = await http.get(request);
 
         if (response.statusCode == 200) {
             final map = json.decode(response.body);
@@ -40,15 +40,20 @@ class NewsAppState extends State<NewsApp>
     }
 
     createListView() {
-        return Center(
-            child: articles == null
-                ? CircularProgressIndicator()
-                : ListView.builder(
-                itemCount: articles != null ? articles.length : 0,
-                itemBuilder: (context, index) {
-                    return createFlatButton(context, articles[index]);
-                },
-            ),
+        return Column(
+            children: <Widget>[
+                Expanded(
+                    child: RefreshIndicator(
+                        onRefresh: fetchData,
+                        child: ListView.builder(
+                            itemCount: articles != null ? articles.length : 0,
+                            itemBuilder: (context, index) {
+                                return createFlatButton(context, articles[index]);
+                            },
+                        ),
+                    ),
+                ),
+            ],
         );
     }
 
