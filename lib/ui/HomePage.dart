@@ -137,7 +137,12 @@ class _HomePageState extends State<HomePage> {
     Widget build(BuildContext context) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                primarySwatch: Colors.lime,
+                hintColor: Colors.cyan,
+            ),
             home: Scaffold(
+                backgroundColor: Colors.grey[100],
                 appBar: AppBar(
                     title: Text("News App"),
                     actions: <Widget>[

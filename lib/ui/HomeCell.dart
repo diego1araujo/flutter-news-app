@@ -45,9 +45,9 @@ class HomeCell extends StatelessWidget
         );
 
         return Container(
-            padding: EdgeInsets.all(5.0),
+            padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),
             child: Card(
-                elevation: 3.0,
+                elevation: 5.0,
                 child: Padding(
                     padding: EdgeInsets.all(0.0),
                     child: Column(
