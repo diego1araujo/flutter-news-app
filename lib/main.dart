@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
+import 'ui/HomePage.dart';
 
-void main() => runApp(NewsApp());
-
-class NewsApp extends StatefulWidget
-{
-    @override
-    State<StatefulWidget> createState() {
-        return NewsAppState();
-    }
-}
+void main() => runApp(HomePage());
