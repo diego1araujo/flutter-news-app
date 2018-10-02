@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
-class HomeCell extends StatelessWidget
+class HomeFeatured extends StatelessWidget
 {
     final article;
 
-    HomeCell(this.article);
+    HomeFeatured(this.article);
 
     @override
     Widget build(BuildContext context) {
@@ -28,6 +28,7 @@ class HomeCell extends StatelessWidget
             child: Text(
                 "Published " + timeago.format(DateTime.parse(article["publishedAt"]), locale: "en"),
                 style: TextStyle(
+                    fontSize: 12.0,
                     color: Colors.grey[500],
                 ),
             ),
@@ -38,7 +39,7 @@ class HomeCell extends StatelessWidget
             child: Text(
                 article["title"],
                 style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 17.0,
                     fontWeight: FontWeight.bold,
                 ),
             ),

@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:connectivity/connectivity.dart';
 
-import 'HomeCell.dart';
+import 'HomeFeatured.dart';
+import 'HomeNormal.dart';
 import 'DetailPage.dart';
 
 const request = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
@@ -39,9 +40,9 @@ class _HomePageState extends State<HomePage> {
         });
     }
 
-    Widget _createGesture(context, article) {
+    Widget _createGestureDetector(context, index, article) {
         return GestureDetector(
-            child: HomeCell(article),
+            child: index == 0 ? HomeFeatured(article) : HomeNormal(article),
             onTap: () {
                 Navigator.push(
                     context,
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         return ListView.builder(
             itemCount: snapshot.data["articles"] == null ? 0 : snapshot.data["articles"].length,
             itemBuilder: (BuildContext context, int index) {
-                return _createGesture(context, snapshot.data["articles"][index]);
+                return _createGestureDetector(context, index, snapshot.data["articles"][index]);
             },
         );
     }
@@ -137,6 +138,7 @@ class _HomePageState extends State<HomePage> {
     Widget build(BuildContext context) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
+            title: "News App",
             theme: ThemeData(
                 primarySwatch: Colors.lime,
                 hintColor: Colors.cyan,
