@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:connectivity/connectivity.dart';
 
-import 'HomeFeatured.dart';
-import 'HomeNormal.dart';
-import 'DetailPage.dart';
+import './normal.dart';
+import './featured.dart';
+import '../detail/page.dart';
 
 const request = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
 
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             return _futureBuilder();
         }
 
-        return _errorMessage("Outch! It seems that you are offline. Please check your internet connection.");
+        return _errorMessage("Outch! It seems that you are offline.\nPlease check your internet connection.");
     }
 
     Widget _listView(context, snapshot) {
@@ -89,8 +90,7 @@ class _HomePageState extends State<HomePage> {
                             return _listView(context, snapshot);
                         }
 
-                        return Container(
-                            alignment: Alignment.center,
+                        return Center(
                             child: CircularProgressIndicator(),
                         );
                     },
@@ -140,8 +140,8 @@ class _HomePageState extends State<HomePage> {
             debugShowCheckedModeBanner: false,
             title: "News App",
             theme: ThemeData(
-                primarySwatch: Colors.lime,
-                hintColor: Colors.cyan,
+                primarySwatch: Colors.teal,
+                hintColor: Colors.teal[200],
             ),
             home: Scaffold(
                 backgroundColor: Colors.grey[100],

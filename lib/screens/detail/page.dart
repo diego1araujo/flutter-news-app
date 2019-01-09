@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
-import 'DetailCell.dart';
+import './tile.dart';
 
 class DetailPage extends StatelessWidget
 {
@@ -25,7 +25,7 @@ class DetailPage extends StatelessWidget
                 ],
             ),
             body: Center(
-                child: DetailCell(article),
+                child: DetailTile(article),
             ),
         );
     }

@@ -18,14 +18,14 @@ class HomeNormal extends StatelessWidget
                     placeholder: kTransparentImage,
                     image: article["urlToImage"],
                     width: 160.0,
-                    height: 100.0,
+                    height: 110.0,
                     fit: BoxFit.cover
                 )
             : null,
         );
 
         final _published = Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 5.0, 4.0, 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
                 "Published " + timeago.format(DateTime.parse(article["publishedAt"]), locale: "en"),
                 style: TextStyle(
@@ -36,18 +36,18 @@ class HomeNormal extends StatelessWidget
         );
 
         final _title = Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Text(
                 article["title"],
                 style: TextStyle(
-                    fontSize: 15.0,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                 ),
             ),
         );
 
         return Container(
-            padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),
+            padding: const EdgeInsets.all(5.0),
             child: Card(
                 elevation: 5.0,
                 child: Row(
