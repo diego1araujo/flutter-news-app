@@ -9,13 +9,11 @@ class HomeFeatured extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        final bool isImageExists = article["urlToImage"] != null;
-
         final _imageCover = SizedBox(
-            child: isImageExists ?
+            child: article['urlToImage'] != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article["urlToImage"],
+                    image: article['urlToImage'],
                     height: 200.0,
                     fit: BoxFit.cover
                 )
@@ -25,28 +23,31 @@ class HomeFeatured extends StatelessWidget
         final _title = Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-                article["title"],
+                article['title'],
                 style: TextStyle(
                     fontSize: 17.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueGrey[900],
                 ),
             ),
         );
 
         return Container(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(3.0),
             child: Card(
-                elevation: 5.0,
-                child: Padding(
-                    padding: EdgeInsets.all(0.0),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                            _imageCover,
-                            _title,
-                        ],
-                    ),
+                elevation: 2.0,
+                child: Row(
+                    children: <Widget>[
+                        Expanded(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: <Widget>[
+                                    _imageCover,
+                                    _title,
+                                ],
+                            ),
+                        ),
+                    ],
                 ),
             ),
         );

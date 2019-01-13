@@ -21,10 +21,10 @@ class _HomePageState extends State<HomePage> {
     String _connectionStatus = 'Unknown';
     final Connectivity _connectivity = Connectivity();
 
-    Future<Map> _fetchData() async {
+    Future<List> _fetchData() async {
         http.Response response = await http.get(request);
 
-        return json.decode(response.body);
+        return json.decode(response.body)['articles'];
     }
 
     Future<Null> initConnectivity() async {
@@ -41,6 +41,46 @@ class _HomePageState extends State<HomePage> {
         });
     }
 
+    Widget _homeLayout() {
+        if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
+            return Container(
+                child: Column(
+                    children: <Widget>[
+                        Expanded(
+                            child: _futureListView(),
+                        ),
+                    ],
+                ),
+            );
+        }
+
+        return _errorMessage('Outch! It seems that you are offline.\nPlease check your internet connection.');
+    }
+
+    FutureBuilder _futureListView() {
+        return FutureBuilder(
+            future: _fetchData(),
+            builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                        return _errorMessage('We\'re sorry something went wrong :(');
+                    }
+
+                    return ListView.builder(
+                        itemCount: snapshot.data == null ? 0 : snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                            return _createGestureDetector(context, index, snapshot.data[index]);
+                        },
+                    );
+                }
+
+                return Center(
+                    child: CircularProgressIndicator(),
+                );
+            },
+        );
+    }
+
     Widget _createGestureDetector(context, index, article) {
         return GestureDetector(
             child: index == 0 ? HomeFeatured(article) : HomeNormal(article),
@@ -53,64 +93,24 @@ class _HomePageState extends State<HomePage> {
                 );
             },
             onLongPress: () {
-                Share.share(article["url"]);
+                Share.share(article['url']);
             },
-        );
-    }
-
-    Widget _homeLayout() {
-        if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
-            return _futureBuilder();
-        }
-
-        return _errorMessage("Outch! It seems that you are offline.\nPlease check your internet connection.");
-    }
-
-    Widget _listView(context, snapshot) {
-        return ListView.builder(
-            itemCount: snapshot.data["articles"] == null ? 0 : snapshot.data["articles"].length,
-            itemBuilder: (BuildContext context, int index) {
-                return _createGestureDetector(context, index, snapshot.data["articles"][index]);
-            },
-        );
-    }
-
-    Widget _futureBuilder() {
-        return Expanded(
-            child: RefreshIndicator(
-                onRefresh: _fetchData,
-                child: FutureBuilder(
-                    future: _fetchData(),
-                    builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                            if (snapshot.hasError) {
-                                return _errorMessage("We're sorry something went wrong :(");
-                            }
-
-                            return _listView(context, snapshot);
-                        }
-
-                        return Center(
-                            child: CircularProgressIndicator(),
-                        );
-                    },
-                ),
-            ),
         );
     }
 
     Widget _errorMessage(String text) {
         return Container(
-            padding: EdgeInsets.all(15.0),
+            width: double.infinity,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                     Text(
                         text,
                         style: TextStyle(
-                            color: Colors.red,
+                            color: Colors.red[600],
                             fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                         ),
                     ),
                 ],
@@ -128,17 +128,13 @@ class _HomePageState extends State<HomePage> {
                 _connectionStatus = result.toString();
             });
         });
-
-        if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
-            _fetchData();
-        }
     }
 
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: "News App",
+            title: 'News App',
             theme: ThemeData(
                 primarySwatch: Colors.teal,
                 hintColor: Colors.teal[200],
@@ -146,21 +142,19 @@ class _HomePageState extends State<HomePage> {
             home: Scaffold(
                 backgroundColor: Colors.grey[100],
                 appBar: AppBar(
-                    title: Text("News App"),
+                    title: Text('News App'),
                     actions: <Widget>[
                         IconButton(
                             icon: Icon(Icons.refresh),
-                            onPressed: _fetchData,
+                            onPressed: () {
+                                setState(() {
+                                    _fetchData();
+                                });
+                            },
                         ),
                     ],
                 ),
-                body: Container(
-                    child: Column(
-                        children: <Widget>[
-                            _homeLayout(),
-                        ],
-                    ),
-                ),
+                body: _homeLayout(),
             ),
         );
     }

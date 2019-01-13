@@ -10,15 +10,14 @@ class DetailTile extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        final bool isImageExists = article["urlToImage"] != null;
-
         final _title = Padding(
             padding: const EdgeInsets.only(bottom: 10.0),
             child: Text(
-                article["title"],
+                article['title'],
                 style: TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueGrey[900],
                 ),
             ),
         );
@@ -26,18 +25,18 @@ class DetailTile extends StatelessWidget
         final _published = Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-                "Published " + timeago.format(DateTime.parse(article["publishedAt"]), locale: "en"),
+                'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
                 style: TextStyle(
-                    color: Colors.grey[500],
+                    color: Colors.blueGrey,
                 ),
             ),
         );
 
         final _imageCover = SizedBox(
-            child: isImageExists ?
+            child: article['urlToImage'] != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article["urlToImage"],
+                    image: article['urlToImage'],
                     width: double.infinity,
                     height: 200.0,
                     fit: BoxFit.cover,
@@ -46,17 +45,18 @@ class DetailTile extends StatelessWidget
         );
 
         final _description = Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: Text(
-                article["description"],
+                article['description'],
                 style: TextStyle(
                     fontSize: 14.0,
+                    color: Colors.blueGrey[900],
                 ),
             ),
         );
 
         return Container(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

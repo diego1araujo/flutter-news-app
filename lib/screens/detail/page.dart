@@ -14,7 +14,6 @@ class DetailPage extends StatelessWidget
         return Scaffold(
             backgroundColor: Colors.grey[100],
             appBar: AppBar(
-                title: Text(article["title"]),
                 actions: <Widget>[
                     IconButton(
                         icon: Icon(Icons.share),
@@ -24,9 +23,7 @@ class DetailPage extends StatelessWidget
                     ),
                 ],
             ),
-            body: Center(
-                child: DetailTile(article),
-            ),
+            body: DetailTile(article),
         );
     }
 }

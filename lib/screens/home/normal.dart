@@ -10,13 +10,11 @@ class HomeNormal extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        final bool isImageExists = article["urlToImage"] != null;
-
         final _imageCover = SizedBox(
-            child: isImageExists ?
+            child: article['urlToImage'] != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article["urlToImage"],
+                    image: article['urlToImage'],
                     width: 160.0,
                     height: 110.0,
                     fit: BoxFit.cover
@@ -27,10 +25,10 @@ class HomeNormal extends StatelessWidget
         final _published = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
-                "Published " + timeago.format(DateTime.parse(article["publishedAt"]), locale: "en"),
+                'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
                 style: TextStyle(
                     fontSize: 12.0,
-                    color: Colors.grey[500],
+                    color: Colors.blueGrey,
                 ),
             ),
         );
@@ -38,18 +36,19 @@ class HomeNormal extends StatelessWidget
         final _title = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Text(
-                article["title"],
+                article['title'],
                 style: TextStyle(
                     fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueGrey[900],
                 ),
             ),
         );
 
         return Container(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(3.0),
             child: Card(
-                elevation: 5.0,
+                elevation: 2.0,
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
