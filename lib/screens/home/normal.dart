@@ -36,7 +36,7 @@ class HomeNormal extends StatelessWidget
         );
 
         final _title = Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
                 article.title,
                 style: TextStyle(
@@ -51,22 +51,24 @@ class HomeNormal extends StatelessWidget
             padding: const EdgeInsets.all(3.0),
             child: Card(
                 elevation: 2.0,
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                        Container(
-                            child: _imageCover,
-                        ),
-                        Expanded(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                    _published,
-                                    _title,
-                                ],
+                child: IntrinsicHeight(
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                            Container(
+                                child: _imageCover,
                             ),
-                        ),
-                    ],
+                            Expanded(
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                        _published,
+                                        _title,
+                                    ],
+                                ),
+                            ),
+                        ],
+                    ),
                 ),
             ),
         );
