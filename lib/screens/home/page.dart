@@ -9,6 +9,7 @@ import 'package:connectivity/connectivity.dart';
 import './normal.dart';
 import './featured.dart';
 import '../detail/page.dart';
+import '../../models/article.dart';
 
 const request = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
 
@@ -21,10 +22,16 @@ class _HomePageState extends State<HomePage> {
     String _connectionStatus = 'Unknown';
     final Connectivity _connectivity = Connectivity();
 
-    Future<List> _fetchData() async {
+    Future<List<Article>> _fetchData() async {
         http.Response response = await http.get(request);
 
-        return json.decode(response.body)['articles'];
+        if (response.statusCode == 200) {
+            List articles = json.decode(response.body)['articles'];
+
+            return articles.map((json) => new Article.fromJson(json)).toList();
+        }
+
+        throw Exception('Something went wrong');
     }
 
     Future<Null> initConnectivity() async {
@@ -92,9 +99,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                 );
             },
-            onLongPress: () {
-                Share.share(article['url']);
-            },
+            onLongPress: () => Share.share(article.url),
         );
     }
 

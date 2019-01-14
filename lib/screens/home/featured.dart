@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../models/article.dart';
+
 class HomeFeatured extends StatelessWidget
 {
-    final article;
+    final Article article;
 
     HomeFeatured(this.article);
 
     @override
     Widget build(BuildContext context) {
         final _imageCover = SizedBox(
-            child: article['urlToImage'] != null ?
+            child: article.image != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article['urlToImage'],
+                    image: article.image,
                     height: 200.0,
-                    fit: BoxFit.cover
+                    fit: BoxFit.cover,
                 )
             : null,
         );
@@ -23,9 +25,9 @@ class HomeFeatured extends StatelessWidget
         final _title = Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-                article['title'],
+                article.title,
                 style: TextStyle(
-                    fontSize: 17.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.blueGrey[900],
                 ),

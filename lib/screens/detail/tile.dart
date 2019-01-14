@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../models/article.dart';
+
 class DetailTile extends StatelessWidget
 {
-    final article;
+    final Article article;
 
     DetailTile(this.article);
 
@@ -13,9 +15,9 @@ class DetailTile extends StatelessWidget
         final _title = Padding(
             padding: const EdgeInsets.only(bottom: 10.0),
             child: Text(
-                article['title'],
+                article.title,
                 style: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.blueGrey[900],
                 ),
@@ -25,7 +27,7 @@ class DetailTile extends StatelessWidget
         final _published = Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-                'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
+                'Published ' + timeago.format(DateTime.parse(article.date), locale: 'en'),
                 style: TextStyle(
                     color: Colors.blueGrey,
                 ),
@@ -33,10 +35,10 @@ class DetailTile extends StatelessWidget
         );
 
         final _imageCover = SizedBox(
-            child: article['urlToImage'] != null ?
+            child: article.image != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article['urlToImage'],
+                    image: article.image,
                     width: double.infinity,
                     height: 200.0,
                     fit: BoxFit.cover,
@@ -47,7 +49,7 @@ class DetailTile extends StatelessWidget
         final _description = Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Text(
-                article['description'],
+                article.description,
                 style: TextStyle(
                     fontSize: 14.0,
                     color: Colors.blueGrey[900],

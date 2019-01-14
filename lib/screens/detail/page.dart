@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
+import '../../models/article.dart';
+
 import './tile.dart';
 
 class DetailPage extends StatelessWidget
 {
-    final article;
+    final Article article;
 
     DetailPage(this.article);
 
@@ -17,9 +19,7 @@ class DetailPage extends StatelessWidget
                 actions: <Widget>[
                     IconButton(
                         icon: Icon(Icons.share),
-                        onPressed: () {
-                            Share.share(article["url"]);
-                        },
+                        onPressed: () => Share.share(article.url),
                     ),
                 ],
             ),

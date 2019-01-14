@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../models/article.dart';
+
 class HomeNormal extends StatelessWidget
 {
-    final article;
+    final Article article;
 
     HomeNormal(this.article);
 
     @override
     Widget build(BuildContext context) {
         final _imageCover = SizedBox(
-            child: article['urlToImage'] != null ?
+            child: article.image != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: article['urlToImage'],
+                    image: article.image,
                     width: 160.0,
                     height: 110.0,
-                    fit: BoxFit.cover
+                    fit: BoxFit.cover,
                 )
             : null,
         );
@@ -25,7 +27,7 @@ class HomeNormal extends StatelessWidget
         final _published = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
-                'Published ' + timeago.format(DateTime.parse(article['publishedAt']), locale: 'en'),
+                'Published ' + timeago.format(DateTime.parse(article.date), locale: 'en'),
                 style: TextStyle(
                     fontSize: 12.0,
                     color: Colors.blueGrey,
@@ -36,7 +38,7 @@ class HomeNormal extends StatelessWidget
         final _title = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Text(
-                article['title'],
+                article.title,
                 style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w700,
