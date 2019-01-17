@@ -1,4 +1,4 @@
-package com.example.newsapprenew;
+package com.example.newsapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
