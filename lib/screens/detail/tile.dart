@@ -17,9 +17,10 @@ class DetailTile extends StatelessWidget
             child: Text(
                 article.title,
                 style: TextStyle(
-                    fontSize: 22.0,
+                    fontSize: 24.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.blueGrey[900],
+                    letterSpacing: 0.5,
                 ),
             ),
         );
@@ -34,7 +35,7 @@ class DetailTile extends StatelessWidget
             ),
         );
 
-        final _imageCover = SizedBox(
+        final _imageCover = Container(
             child: article.image != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,

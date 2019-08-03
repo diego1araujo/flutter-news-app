@@ -12,22 +12,19 @@ class HomeNormal extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        final _imageCover = SizedBox(
-            child: article.image != null ?
-                FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: article.image,
-                    width: 160.0,
-                    height: 110.0,
-                    fit: BoxFit.cover,
-                )
-            : null,
-        );
+        final _imageCover = article.image != null ?
+            FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: article.image,
+                width: 160.0,
+                height: 110.0,
+                fit: BoxFit.cover,
+            ) : null;
 
         final _published = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
-                'Published ' + timeago.format(DateTime.parse(article.date), locale: 'en'),
+                timeago.format(DateTime.parse(article.date), locale: 'en'),
                 style: TextStyle(
                     fontSize: 12.0,
                     color: Colors.blueGrey,
@@ -43,6 +40,7 @@ class HomeNormal extends StatelessWidget
                     fontSize: 16.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.blueGrey[900],
+                    letterSpacing: 0.2,
                 ),
             ),
         );

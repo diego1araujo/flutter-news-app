@@ -75,9 +75,7 @@ class _HomePageState extends State<HomePage> {
 
                     return ListView.builder(
                         itemCount: snapshot.data == null ? 0 : snapshot.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                            return _createGestureDetector(context, index, snapshot.data[index]);
-                        },
+                        itemBuilder: (context, index) => _createGestureDetector(context, index, snapshot.data[index]),
                     );
                 }
 
@@ -113,8 +111,8 @@ class _HomePageState extends State<HomePage> {
                     Text(
                         text,
                         style: TextStyle(
-                            color: Colors.red[600],
-                            fontSize: 18.0,
+                            color: Colors.red[900],
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w700,
                         ),
                     ),

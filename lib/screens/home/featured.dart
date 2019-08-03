@@ -11,16 +11,15 @@ class HomeFeatured extends StatelessWidget
 
     @override
     Widget build(BuildContext context) {
-        final _imageCover = SizedBox(
+        final _imageCover = Container(
             child: article.image != null ?
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: article.image,
                     height: 200.0,
                     fit: BoxFit.cover,
-                )
-            : null,
-        );
+                ) : null,
+            );
 
         final _title = Padding(
             padding: EdgeInsets.all(8.0),
@@ -30,6 +29,7 @@ class HomeFeatured extends StatelessWidget
                     fontSize: 20.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.blueGrey[900],
+                    letterSpacing: 0.2,
                 ),
             ),
         );
