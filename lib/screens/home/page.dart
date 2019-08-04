@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:connectivity/connectivity.dart';
 
+import '../style.dart';
 import './normal.dart';
 import './featured.dart';
 import '../detail/page.dart';
@@ -110,11 +111,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                     Text(
                         text,
-                        style: TextStyle(
-                            color: Colors.red[900],
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w700,
-                        ),
+                        style: errorMessage,
                     ),
                 ],
             ),
@@ -139,6 +136,7 @@ class _HomePageState extends State<HomePage> {
             debugShowCheckedModeBanner: false,
             title: 'News App',
             theme: ThemeData(
+                fontFamily: 'SegoeUI',
                 primarySwatch: Colors.teal,
                 hintColor: Colors.teal[200],
             ),

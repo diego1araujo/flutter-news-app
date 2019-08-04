@@ -3,6 +3,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../models/article.dart';
+import '../style.dart';
 
 class DetailTile extends StatelessWidget
 {
@@ -16,12 +17,7 @@ class DetailTile extends StatelessWidget
             padding: const EdgeInsets.only(bottom: 10.0),
             child: Text(
                 article.title,
-                style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.blueGrey[900],
-                    letterSpacing: 0.5,
-                ),
+                style: titleDetail,
             ),
         );
 
@@ -29,9 +25,7 @@ class DetailTile extends StatelessWidget
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
                 'Published ' + timeago.format(DateTime.parse(article.date), locale: 'en'),
-                style: TextStyle(
-                    color: Colors.blueGrey,
-                ),
+                style: publishedDetail,
             ),
         );
 
@@ -51,23 +45,22 @@ class DetailTile extends StatelessWidget
             padding: const EdgeInsets.only(top: 10.0),
             child: Text(
                 article.description,
-                style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.blueGrey[900],
-                ),
+                style: descriptionDetail,
             ),
         );
 
-        return Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                    _title,
-                    _published,
-                    _imageCover,
-                    _description,
-                ],
+        return SingleChildScrollView(
+            child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                        _title,
+                        _published,
+                        _imageCover,
+                        _description,
+                    ],
+                ),
             ),
         );
     }

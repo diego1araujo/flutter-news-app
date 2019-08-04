@@ -3,6 +3,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../models/article.dart';
+import '../style.dart';
 
 class HomeNormal extends StatelessWidget
 {
@@ -25,10 +26,7 @@ class HomeNormal extends StatelessWidget
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
                 timeago.format(DateTime.parse(article.date), locale: 'en'),
-                style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.blueGrey,
-                ),
+                style: publishedHomeNormal,
             ),
         );
 
@@ -36,12 +34,7 @@ class HomeNormal extends StatelessWidget
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
             child: Text(
                 article.title,
-                style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.blueGrey[900],
-                    letterSpacing: 0.2,
-                ),
+                style: titleHomeNormal,
             ),
         );
 

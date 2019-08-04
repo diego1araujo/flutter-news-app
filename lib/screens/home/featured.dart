@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../../models/article.dart';
+import '../style.dart';
 
 class HomeFeatured extends StatelessWidget
 {
@@ -25,12 +26,7 @@ class HomeFeatured extends StatelessWidget
             padding: EdgeInsets.all(8.0),
             child: Text(
                 article.title,
-                style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.blueGrey[900],
-                    letterSpacing: 0.2,
-                ),
+                style: titleHomeFeatured,
             ),
         );
 

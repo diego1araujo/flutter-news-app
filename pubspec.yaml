@@ -24,6 +24,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: SegoeUI
+      fonts:
+        - asset: assets/fonts/segoe-ui/Segoe-UI.ttf
+        - asset: assets/fonts/segoe-ui/Segoe-UI-Bold.ttf
+          weight: 700
+
 flutter_icons:
   android: true
   ios: true
