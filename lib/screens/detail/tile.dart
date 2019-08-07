@@ -14,7 +14,7 @@ class DetailTile extends StatelessWidget
     @override
     Widget build(BuildContext context) {
         final _title = Padding(
-            padding: const EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 20.0),
             child: Text(
                 article.title,
                 style: titleDetail,
@@ -42,7 +42,7 @@ class DetailTile extends StatelessWidget
         );
 
         final _description = Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 15.0),
             child: Text(
                 article.description,
                 style: descriptionDetail,
@@ -51,7 +51,7 @@ class DetailTile extends StatelessWidget
 
         return SingleChildScrollView(
             child: Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[

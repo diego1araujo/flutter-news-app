@@ -22,7 +22,7 @@ final TextStyle publishedHomeNormal = TextStyle(
 /* ------------------------------ */
 
 final TextStyle titleDetail = TextStyle(
-    fontSize: 26.0,
+    fontSize: 28.0,
     fontWeight: FontWeight.w700,
     color: Colors.blueGrey[900],
     letterSpacing: 0.5,

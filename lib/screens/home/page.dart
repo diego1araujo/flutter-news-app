@@ -137,8 +137,8 @@ class _HomePageState extends State<HomePage> {
             title: 'News App',
             theme: ThemeData(
                 fontFamily: 'SegoeUI',
-                primarySwatch: Colors.teal,
-                hintColor: Colors.teal[200],
+                primarySwatch: Colors.indigo,
+                hintColor: Colors.indigo[400],
             ),
             home: Scaffold(
                 backgroundColor: Colors.grey[100],

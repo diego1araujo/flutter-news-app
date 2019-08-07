@@ -31,7 +31,7 @@ class HomeFeatured extends StatelessWidget
         );
 
         return Container(
-            padding: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.all(5.0),
             child: Card(
                 elevation: 2.0,
                 child: Row(
