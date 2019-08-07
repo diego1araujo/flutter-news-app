@@ -14,7 +14,7 @@ class DetailTile extends StatelessWidget
     @override
     Widget build(BuildContext context) {
         final _title = Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Text(
                 article.title,
                 style: titleDetail,
@@ -22,7 +22,10 @@ class DetailTile extends StatelessWidget
         );
 
         final _published = Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(
+                left: 20.0,
+                bottom: 7.0,
+            ),
             child: Text(
                 'Published ' + timeago.format(DateTime.parse(article.date), locale: 'en'),
                 style: publishedDetail,
@@ -35,14 +38,14 @@ class DetailTile extends StatelessWidget
                     placeholder: kTransparentImage,
                     image: article.image,
                     width: double.infinity,
-                    height: 200.0,
+                    height: 230.0,
                     fit: BoxFit.cover,
                 )
             : null,
         );
 
         final _description = Padding(
-            padding: const EdgeInsets.only(top: 15.0),
+            padding: const EdgeInsets.all(20.0),
             child: Text(
                 article.description,
                 style: descriptionDetail,
@@ -50,9 +53,7 @@ class DetailTile extends StatelessWidget
         );
 
         return SingleChildScrollView(
-            child: Container(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
+            child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                         _title,
@@ -60,7 +61,6 @@ class DetailTile extends StatelessWidget
                         _imageCover,
                         _description,
                     ],
-                ),
             ),
         );
     }
