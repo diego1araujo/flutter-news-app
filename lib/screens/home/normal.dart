@@ -39,7 +39,7 @@ class HomeNormal extends StatelessWidget
         );
 
         return Container(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(8.0),
             child: Card(
                 elevation: 2.0,
                 child: IntrinsicHeight(

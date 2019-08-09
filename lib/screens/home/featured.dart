@@ -17,7 +17,7 @@ class HomeFeatured extends StatelessWidget
                 FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
                     image: article.image,
-                    height: 200.0,
+                    height: 220.0,
                     fit: BoxFit.cover,
                 ) : null,
             );
