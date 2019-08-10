@@ -23,7 +23,7 @@ class HomeFeatured extends StatelessWidget
             );
 
         final _title = Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10.0),
             child: Text(
                 article.title,
                 style: titleHomeFeatured,
@@ -31,7 +31,12 @@ class HomeFeatured extends StatelessWidget
         );
 
         return Container(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.only(
+                top: 15.0,
+                right: 8.0,
+                bottom: 8.0,
+                left: 8.0,
+            ),
             child: Card(
                 elevation: 2.0,
                 child: Row(

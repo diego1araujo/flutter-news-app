@@ -52,6 +52,9 @@ class _HomePageState extends State<HomePage> {
     Widget _homeLayout() {
         if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
             return Container(
+                padding: EdgeInsets.only(
+                    bottom: 12.0,
+                ),
                 child: Column(
                     children: <Widget>[
                         Expanded(
