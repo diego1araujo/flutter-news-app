@@ -2,38 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
-import '../../models/article.dart';
 import '../style.dart';
+import '../../models/post.dart';
 
-class HomeNormal extends StatelessWidget
+class CardRegular extends StatelessWidget
 {
-    final Article article;
+    final Post post;
 
-    HomeNormal(this.article);
+    CardRegular(this.post);
 
     @override
     Widget build(BuildContext context) {
-        final _imageCover = article.image != null ?
+        final _imageCover = post.image != null ?
             FadeInImage.memoryNetwork(
                 placeholder: kTransparentImage,
-                image: article.image,
+                image: post.image,
                 width: 160.0,
                 height: 110.0,
                 fit: BoxFit.cover,
             ) : null;
 
         final _published = Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 5.0,
+            ),
             child: Text(
-                timeago.format(DateTime.parse(article.date), locale: 'en'),
+                timeago.format(DateTime.parse(post.date), locale: 'en'),
                 style: publishedHomeNormal,
             ),
         );
 
         final _title = Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 5.0,
+            ),
             child: Text(
-                article.title,
+                post.title,
                 style: titleHomeNormal,
             ),
         );

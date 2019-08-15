@@ -6,13 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:connectivity/connectivity.dart';
 
+import 'card_featured.dart';
+import 'card_regular.dart';
 import '../style.dart';
-import './normal.dart';
-import './featured.dart';
 import '../detail/page.dart';
-import '../../models/article.dart';
-
-const request = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
+import '../../models/post.dart';
 
 class HomePage extends StatefulWidget {
     @override
@@ -23,16 +21,18 @@ class _HomePageState extends State<HomePage> {
     String _connectionStatus = 'Unknown';
     final Connectivity _connectivity = Connectivity();
 
-    Future<List<Article>> _fetchData() async {
-        http.Response response = await http.get(request);
+    Future<List<Post>> _fetchData() async {
+        const apiUrl = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
+
+        var response = await http.get(apiUrl);
 
         if (response.statusCode == 200) {
-            List articles = json.decode(response.body)['articles'];
+            List posts = json.decode(response.body)['articles'];
 
-            return articles.map((json) => new Article.fromJson(json)).toList();
+            return posts.map((json) => Post.fromJson(json)).toList();
         }
 
-        throw Exception('Something went wrong');
+        throw Exception('Failed to load.');
     }
 
     Future<Null> initConnectivity() async {
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         });
     }
 
-    Widget _homeLayout() {
+    Widget _makeBody() {
         if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
             return Container(
                 padding: EdgeInsets.only(
@@ -58,17 +58,17 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                     children: <Widget>[
                         Expanded(
-                            child: _futureListView(),
+                            child: _makeListView(),
                         ),
                     ],
                 ),
             );
         }
 
-        return _errorMessage('Outch! It seems that you are offline.\nPlease check your internet connection.');
+        return _errorMessage('Outch! It seems you\'re offline.\nPlease check your internet connection.');
     }
 
-    FutureBuilder _futureListView() {
+    FutureBuilder _makeListView() {
         return FutureBuilder(
             future: _fetchData(),
             builder: (context, snapshot) {
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
 
                     return ListView.builder(
                         itemCount: snapshot.data == null ? 0 : snapshot.data.length,
-                        itemBuilder: (context, index) => _createGestureDetector(context, index, snapshot.data[index]),
+                        itemBuilder: (context, index) => _makeGesture(context, index, snapshot.data[index]),
                     );
                 }
 
@@ -90,18 +90,16 @@ class _HomePageState extends State<HomePage> {
         );
     }
 
-    Widget _createGestureDetector(context, index, article) {
+    Widget _makeGesture(context, index, post) {
         return GestureDetector(
-            child: index == 0 ? HomeFeatured(article) : HomeNormal(article),
+            child: index == 0 ? CardFeatured(post) : CardRegular(post),
             onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailPage(article),
+                Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => DetailPage(post),
                     ),
                 );
             },
-            onLongPress: () => Share.share(article.url),
+            onLongPress: () => Share.share(post.url),
         );
     }
 
@@ -158,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                     ],
                 ),
-                body: _homeLayout(),
+                body: _makeBody(),
             ),
         );
     }
