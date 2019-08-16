@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:connectivity/connectivity.dart';
 
+import 'load_page.dart';
 import 'card_featured.dart';
 import 'card_regular.dart';
 import '../style.dart';
@@ -83,9 +84,7 @@ class _HomePageState extends State<HomePage> {
                     );
                 }
 
-                return Center(
-                    child: CircularProgressIndicator(),
-                );
+                return LoadPage();
             },
         );
     }
