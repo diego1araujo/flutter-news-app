@@ -19,21 +19,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    String _connectionStatus = 'Unknown';
-    final Connectivity _connectivity = Connectivity();
+    String _connectionStatus;
+    final _connectivity = Connectivity();
 
     Future<List<Post>> _fetchData() async {
-        const apiUrl = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
+        var url = 'https://newsapi.org/v2/everything?sources=cbs-news&apiKey=ac9ed44be725499e8d20dd80d113750f';
 
-        var response = await http.get(apiUrl);
+        var response = await http.get(url);
 
         if (response.statusCode == 200) {
             List posts = json.decode(response.body)['articles'];
 
             return posts.map((json) => Post.fromJson(json)).toList();
+        } else {
+            throw Exception('Failed to load');
         }
-
-        throw Exception('Failed to load.');
     }
 
     Future<Null> initConnectivity() async {
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         try {
             connectionStatus = (await _connectivity.checkConnectivity()).toString();
         } catch (e) {
-            connectionStatus = 'Unknown';
+            connectionStatus = 'ConnectivityResult.none';
         }
 
         setState(() {
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget _makeBody() {
-        if (_connectionStatus != 'Unknown' && _connectionStatus != 'ConnectivityResult.none') {
+        if (_connectionStatus != 'ConnectivityResult.none') {
             return Container(
                 padding: EdgeInsets.only(
                     bottom: 12.0,
@@ -72,15 +72,15 @@ class _HomePageState extends State<HomePage> {
     FutureBuilder _makeListView() {
         return FutureBuilder(
             future: _fetchData(),
-            builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
+            builder: (BuildContext c, AsyncSnapshot s) {
+                if (s.connectionState == ConnectionState.done) {
+                    if (s.hasError) {
                         return _errorMessage('We\'re sorry something went wrong :(');
                     }
 
                     return ListView.builder(
-                        itemCount: snapshot.data == null ? 0 : snapshot.data.length,
-                        itemBuilder: (context, index) => _makeGesture(context, index, snapshot.data[index]),
+                        itemCount: s.data.length ?? 0,
+                        itemBuilder: (context, index) => _makeGesture(context, index, s.data[index]),
                     );
                 }
 
@@ -92,12 +92,10 @@ class _HomePageState extends State<HomePage> {
     Widget _makeGesture(context, index, post) {
         return GestureDetector(
             child: index == 0 ? CardFeatured(post) : CardRegular(post),
-            onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => DetailPage(post),
-                    ),
-                );
-            },
+            onTap: () => Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => DetailPage(post),
+                ),
+            ),
             onLongPress: () => Share.share(post.url),
         );
     }

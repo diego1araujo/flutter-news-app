@@ -32,10 +32,10 @@ class CardFeatured extends StatelessWidget
 
         return Container(
             padding: const EdgeInsets.only(
+                left: 8.0,
                 top: 15.0,
                 right: 8.0,
                 bottom: 8.0,
-                left: 8.0,
             ),
             child: Card(
                 elevation: 2.0,
