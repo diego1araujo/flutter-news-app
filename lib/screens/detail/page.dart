@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
 import '../style.dart';
@@ -28,7 +27,7 @@ class DetailPage extends StatelessWidget
                 bottom: 7.0,
             ),
             child: Text(
-                'Published ' + timeago.format(DateTime.parse(post.date), locale: 'en'),
+                'Published ' + post.date,
                 style: publishedDetail,
             ),
         );

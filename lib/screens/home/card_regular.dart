@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:transparent_image/transparent_image.dart';
 
 import '../style.dart';
@@ -28,7 +27,7 @@ class CardRegular extends StatelessWidget
                 vertical: 5.0,
             ),
             child: Text(
-                timeago.format(DateTime.parse(post.date), locale: 'en'),
+                post.date,
                 style: publishedHomeNormal,
             ),
         );

@@ -1,3 +1,5 @@
+import 'package:timeago/timeago.dart' as timeago;
+
 class Post {
     String title, description, url, image, date;
 
@@ -8,6 +10,6 @@ class Post {
         description = json['description'];
         url = json['url'];
         image = json['urlToImage'];
-        date = json['publishedAt'];
+        date = timeago.format(DateTime.parse(json['publishedAt']));
     }
 }
